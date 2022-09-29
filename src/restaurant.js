@@ -93,6 +93,26 @@
 // - retornará o valor somado acrescido de 10%.
 // DICA: para isso, você precisará percorrer tanto o objeto da chave `food` quanto o objeto da chave `drink`.
 
-const createMenu = () => {};
+const createMenu = (myMenu) => {
+  const obj = {
+    fetchMenu: () => myMenu,
+    consumption: [],
+    order: (request) => obj.consumption.push(request),
+    pay: () => {
+      let count = 0;
+
+      obj.consumption.forEach((element) => {
+      if (Object.keys(obj.fetchMenu().food).includes(element)) {
+          count += obj.fetchMenu().food[element];
+        }
+        if (Object.keys(obj.fetchMenu().drink).includes(element)) {
+          count += obj.fetchMenu().drink[element];
+        }
+      });
+      return count * 1.10;
+      },
+    };
+    return obj;
+  };
 
 module.exports = createMenu;
